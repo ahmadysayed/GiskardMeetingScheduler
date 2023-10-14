@@ -30,6 +30,14 @@ def list_availabilities(request):
     serializer = AvailabilitySerializer(availabilities, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def list_reservation(request):
+    reservations = Reservation.objects.all()
+    serializer = ReservationSerializer(reservations, many=True)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def create_availability(request):
@@ -50,6 +58,7 @@ def delete_availability(request, availability_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
+@permission_classes([IsAdminUser])
 def create_reservation(request):
     serializer = ReservationSerializer(data=request.data)
     if serializer.is_valid():
