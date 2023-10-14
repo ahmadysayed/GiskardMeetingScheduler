@@ -32,7 +32,7 @@ const CreateReservation = () => {
 
   return (
     <FormContainer>
-      <h2 className='mb-4 mt-5'>Create Reservation</h2>
+      <h2 className='mb-3 mt-4'>Create Reservation</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="start">
           <Form.Label>Start:</Form.Label>
