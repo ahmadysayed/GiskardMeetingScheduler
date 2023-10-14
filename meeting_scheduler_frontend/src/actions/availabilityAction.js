@@ -9,15 +9,28 @@ import {
     AVAILABILITY_DELETE_FAIL
 } from "../constants/availabilityConstants";
 
-export const createAvailability = (availabilityData) => async (dispatch) => {
+export const createAvailability = (availabilityData) => async (dispatch, getState) => {
     try {
         dispatch({
             type: AVAILABILITY_CREATE_REQUEST
         });
 
+        const {
+          userLogin: { userInfo },
+        } = getState()
+  
+        const config = {
+          headers: {
+              'Content-type': 'application/json',
+              Authorization: `Bearer ${userInfo.token}`
+          }
+      }
+
+
         const { data } = await axios.post(
             `http://localhost:8000/api/availabilities/create/`,
-            availabilityData
+            availabilityData,
+            config
         );
 
         dispatch({
@@ -36,13 +49,24 @@ export const createAvailability = (availabilityData) => async (dispatch) => {
 
 
 
-export const deleteAvailability = (availabilityId) => async (dispatch) => {
+export const deleteAvailability = (availabilityId) => async (dispatch, getState) => {
     try {
       dispatch({
         type: AVAILABILITY_DELETE_REQUEST
       });
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+
+      const config = {
+        headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`
+        }
+    }
   
-      await axios.delete(`http://localhost:8000/api/availabilities/delete/${availabilityId}/`);
+      await axios.delete(`http://localhost:8000/api/availabilities/delete/${availabilityId}/`, config);
   
       dispatch({
         type: AVAILABILITY_DELETE_SUCCESS,
