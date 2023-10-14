@@ -1,0 +1,24 @@
+.available-slots-container {
+    padding: 20px;
+  }
+  
+  .date-group {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .date-heading {
+    margin-bottom: 10px;
+  }
+  
+  .slot-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  
