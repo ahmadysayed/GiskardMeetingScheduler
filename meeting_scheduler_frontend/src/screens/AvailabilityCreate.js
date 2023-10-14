@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import { useDispatch } from 'react-redux';
 import { createAvailability } from '../actions/availabilityAction';
 
 const AvailabilityCreate = () => {
@@ -10,7 +11,18 @@ const AvailabilityCreate = () => {
     end: ''
   });
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+
+  useEffect(() => {
+    if(!userInfo){
+      navigate('/')
+    }
+}, [navigate, userInfo])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
