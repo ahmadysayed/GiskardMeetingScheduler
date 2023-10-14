@@ -58,7 +58,6 @@ def delete_availability(request, availability_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
 def create_reservation(request):
     serializer = ReservationSerializer(data=request.data)
     if serializer.is_valid():
