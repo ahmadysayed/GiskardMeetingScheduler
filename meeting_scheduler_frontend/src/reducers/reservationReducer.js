@@ -1,4 +1,8 @@
 import { 
+    RESERVATION_LIST_REQUEST,
+    RESERVATION_LIST_SUCCESS,
+    RESERVATION_LIST_FAIL,
+
     RESERVATION_CREATE_REQUEST, 
     RESERVATION_CREATE_SUCCESS, 
     RESERVATION_CREATE_FAIL,
@@ -8,6 +12,36 @@ import {
     RESERVATION_DELETE_FAIL
 } from "../constants/reservationConstants"
 
+
+const initialState = {
+  loading: false,
+  reservations: [],
+  error: null,
+};
+
+export const reservationListReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case RESERVATION_LIST_REQUEST:
+      return { ...state, loading: true, error: null };
+
+    case RESERVATION_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        reservations: action.payload,
+      };
+
+    case RESERVATION_LIST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
 
 export const createReservationReducer = (state = { loading: false, reservation: null, error: null }, action) => {
   switch (action.type) {
