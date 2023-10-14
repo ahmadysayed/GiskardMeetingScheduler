@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import { userLoginReducer } from './reducers/userReducers';
 import { slotListReducer } from './reducers/slotReducers';
-import { createReservationReducer, reservationDeleteReducer } from './reducers/reservationReducer';
+import { createReservationReducer, reservationDeleteReducer, reservationListReducer } from './reducers/reservationReducer';
 import { createAvailabilityReducer, availabilityDeleteReducer } from './reducers/availabilityReducers';
 
 const reducer = { 
@@ -15,7 +15,8 @@ const reducer = {
   slotList: slotListReducer,
   
   createReservation: createReservationReducer,
-  deleteReservation: reservationDeleteReducer
+  deleteReservation: reservationDeleteReducer,
+  listReservation: reservationListReducer
 };
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
