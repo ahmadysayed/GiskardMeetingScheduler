@@ -35,6 +35,10 @@ function Header() {
                 <LinkContainer to='/availability-delete'>
                   <Nav.Link>Delete Time</Nav.Link>
                 </LinkContainer>
+
+                <LinkContainer to='/list-reservation'>
+                  <Nav.Link>Meetings</Nav.Link>
+                </LinkContainer>
               </>
             ) : (
               <>
@@ -52,10 +56,6 @@ function Header() {
           <Nav className="ml-auto">
             {userInfo ? (
               <NavDropdown title={userInfo.username} id='username'>
-                <LinkContainer to='/profile'>
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                </LinkContainer>
-
                 <LinkContainer to='/'>
                   <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                 </LinkContainer>
