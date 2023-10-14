@@ -26,7 +26,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 @api_view(['GET'])
 def list_availabilities(request):
-    availabilities = Availability.objects.all()
+    availabilities = Availability.objects.all().order_by('start')
     serializer = AvailabilitySerializer(availabilities, many=True)
     return Response(serializer.data)
 
@@ -34,7 +34,7 @@ def list_availabilities(request):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def list_reservation(request):
-    reservations = Reservation.objects.all()
+    reservations = Reservation.objects.all().order_by('start')
     serializer = ReservationSerializer(reservations, many=True)
     return Response(serializer.data)
 
