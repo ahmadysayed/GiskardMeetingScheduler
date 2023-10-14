@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Table } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import { deleteAvailability } from '../actions/availabilityAction';
+import { listSlots } from '../actions/slotActions';
 
 const AvailabilityDelete = () => {
   const [availabilityId, setAvailabilityId] = useState('');
+
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+
+  const slotList = useSelector((state) => state.slotList);
+  const { loading, error, slots } = slotList;
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+
+  useEffect(() => {
+    if(!userInfo){
+      navigate('/')
+    }
+    dispatch(listSlots())
+}, [dispatch, navigate, userInfo])
 
   const handleAvailabilityIdChange = (e) => {
     setAvailabilityId(e.target.value);
@@ -42,20 +60,16 @@ const AvailabilityDelete = () => {
             <th>ID</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <Button variant='danger' className='btn-sm'>
-                <i className="fa fa-trash"></i>
-              </Button>
-            </td>
+        {slots.map((slot) => (
+          <tr key={slot.id}>
+            <td>{slot.id}</td>
+            <td>{slot.start.substring(0, 10)} - {slot.start.substring(11, 16)}</td>
+            <td>{slot.end.substring(0, 10)} - {slot.end.substring(11, 16)}</td>
           </tr>
+        ))}
         </tbody>
       </Table>
     </FormContainer>
