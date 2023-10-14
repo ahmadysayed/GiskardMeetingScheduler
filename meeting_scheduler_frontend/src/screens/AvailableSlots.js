@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listSlots } from '../actions/slotActions';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import './AvailableSlots.css'; // Import custom styles
+import './AvailableSlots.css'; 
 
 const groupSlotsByDate = (slots) => {
   const groupedSlots = {};
